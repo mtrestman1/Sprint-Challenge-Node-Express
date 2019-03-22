@@ -47,13 +47,13 @@ router.delete('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const {id} = req.params;
-    const {description, notes, project_id} = req.body;
+    const {description, notes, project_id, completed} = req.body;
     if(!id) {
         return res.status(404).json({ message: 'the action with the specified id does not exist'})
     } else if (!description || !notes || !project_id) {
         return res.status(400).json({ message: 'Please provide description, notes, and projectID'})
     } else {
-        return Actions.update(id, {description, notes, project_id})
+        return Actions.update(id, {description, notes, project_id, completed})
         .then(updated => {
             res.status(201).json(updated)
         })
